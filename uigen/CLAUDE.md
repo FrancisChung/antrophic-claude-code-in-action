@@ -89,6 +89,9 @@ model Project {
 
 ## Code Patterns
 
+### Comments
+Use comments sparingly. Only comment complex code.
+
 ### Path Alias
 Use `@/*` for imports from `src/`:
 ```typescript
