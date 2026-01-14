@@ -64,9 +64,29 @@ The AI has access to two tools for code generation:
 - Entry point is `/App.jsx` (or similar patterns)
 
 ### Authentication
-- JWT-based sessions stored in HTTP-only cookies
-- Anonymous users can use the app without signing up
-- Registered users get project persistence
+
+**Flow**: `AuthDialog` (UI) → `useAuth` (hook) → Server Actions → `lib/auth.ts` (JWT)
+
+**Layers**:
+
+1. **`lib/auth.ts`** - JWT session management using `jose`
+   - Sessions stored in HTTP-only cookie (`auth-token`), 7-day expiration
+   - `createSession(userId, email)` - Signs JWT, sets cookie
+   - `getSession()` - Reads cookie, verifies JWT, returns payload
+   - `deleteSession()` - Clears cookie
+
+2. **`actions/index.ts`** - Server actions
+   - `signUp`: Validates → checks existing → hashes password (bcrypt) → creates user → `createSession()`
+   - `signIn`: Validates → finds user → verifies password → `createSession()`
+   - `signOut`: `deleteSession()` → redirect to `/`
+
+3. **`hooks/use-auth.ts`** - Client hook
+   - Wraps server actions with loading state
+   - `handlePostSignIn()`: Migrates anonymous work to project, redirects to most recent project
+
+4. **`components/auth/AuthDialog.tsx`** - Modal toggling between SignIn/SignUp forms
+
+**Anonymous → Authenticated Migration**: When signing in, `useAuth` checks for anonymous work via `getAnonWorkData()`, creates a project with that data, then redirects
 
 ## Database Schema
 
