@@ -1,6 +1,6 @@
 # Claude Code in Action
 
-Anthrophic Academy's course on Claude Code
+<img width="2108" height="380" alt="image" src="https://github.com/user-attachments/assets/696f0514-eb13-445e-85dc-e8bf68a9f3b3" />
 
 # About this course
 This course provides comprehensive training on using Claude Code for software development tasks, covering the underlying architecture of AI coding assistants, practical implementation techniques, and advanced integration strategies. <br>
