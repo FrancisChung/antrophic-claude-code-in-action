@@ -90,22 +90,7 @@ The AI has access to two tools for code generation:
 
 ## Database Schema
 
-```prisma
-model User {
-  id        String    @id @default(cuid())
-  email     String    @unique
-  password  String    # bcrypt hashed
-  projects  Project[]
-}
-
-model Project {
-  id        String   @id @default(cuid())
-  name      String
-  userId    String?  # nullable for anonymous
-  messages  String   @default("[]")  # JSON array
-  data      String   @default("{}")  # JSON - serialized VirtualFileSystem
-}
-```
+The database schema is defined in `prisma/schema.prisma`. Reference it anytime you need to understand the structure of data stored in the database.
 
 ## Code Patterns
 
