@@ -27,3 +27,4 @@ Teams seeking to implement AI-powered GitHub integration for multiple workflows
 
 # Notes
 1. Claude Code failed spectacularly trying to run `npm audit` and `npm audit fix`. Will do some research and try again at a later date
+2. @claude in github issues was not triggering claude code. Will do some research and try again at a later date.
