@@ -28,3 +28,6 @@ Teams seeking to implement AI-powered GitHub integration for multiple workflows
 # Notes
 1. Claude Code failed spectacularly trying to run `npm audit` and `npm audit fix`. Will do some research and try again at a later date
 2. @claude in github issues was not triggering claude code. Will do some research and try again at a later date.
+3. Hooks Module - You might run into E401 error when running `npm run setup`. Try deleting package-lock.json and start again. You might also have to enable 2FA in npm.org. <br>
+https://stackoverflow.com/questions/67114659/npm-err-code-e401-npm-err-incorrect-or-missing-password
+
