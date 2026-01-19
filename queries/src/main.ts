@@ -3,6 +3,7 @@ import sqlite3 from "sqlite3";
 
 import { createSchema } from "./schema";
 import { getOrdersPendingLongerThan } from "./queries/order_queries";
+import { sendPendingOrderAlert } from "./slack";
 
 async function main() {
   const db = await open({
@@ -14,8 +15,13 @@ async function main() {
 
   const stalePendingOrders = await getOrdersPendingLongerThan(db, 3);
 
-  console.log("Orders pending longer than 3 days:");
-  console.log(stalePendingOrders);
+  if (stalePendingOrders.length > 0) {
+    console.log(`Found ${stalePendingOrders.length} orders pending longer than 3 days`);
+    await sendPendingOrderAlert(stalePendingOrders);
+    console.log("Alert sent to #order-alerts");
+  } else {
+    console.log("No stale pending orders found");
+  }
 }
 
 main();
